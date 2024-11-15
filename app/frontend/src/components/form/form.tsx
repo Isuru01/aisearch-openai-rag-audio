@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import * as Form from "@radix-ui/react-form";
 
 const CustomerForm = () => {
@@ -18,8 +18,9 @@ const CustomerForm = () => {
     // Handle form submission
     const handleSubmit = async (event: { preventDefault: () => void }) => {
         event.preventDefault(); // Prevent the default form submission
+        console.log(formValues);
         try {
-            const response = await fetch("https://your-backend-api.com/submit", {
+            const response = await fetch("https://capps-backend-giqdxn5gdyipg.bluedune-310e7c1a.eastus2.azurecontainerapps.io/api/customer", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -28,6 +29,7 @@ const CustomerForm = () => {
             });
 
             if (response.ok) {
+                console.log(response);
                 alert("Form submitted successfully!");
             } else {
                 const errorData = await response.json();
@@ -35,7 +37,6 @@ const CustomerForm = () => {
             }
         } catch (error) {
             alert("An error occurred while submitting the form.");
-            console.error("Error submitting form:", error);
         }
     };
 
@@ -99,7 +100,7 @@ const CustomerForm = () => {
                             className="Input w-full rounded-md border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
                             type="number"
                             step="0.01"
-                            name="balance"
+                            name="loan"
                             value={formValues.loan}
                             onChange={handleChange}
                             required
